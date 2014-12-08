@@ -4,7 +4,11 @@ module Fuze
     directory = File.dirname(file)
     files_to_concatenate.map do |f|
       path = File.join(directory, f)
-      File.read path
+      unless f[/\.fuze$/]
+        File.read path
+      else
+        fuze path
+      end
     end.join "\n"
   end
 end
